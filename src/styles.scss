@@ -1,0 +1,66 @@
+//login 
+.login {
+    &__wrapper {
+        position: relative;
+        display: flex;
+        height: 100vh;
+        background:
+            linear-gradient(rgba(0, 0, 0, 0.7),
+                rgba(0, 0, 0, 0.5)),
+            url('./assets/bg.png');
+        background-repeat: no-repeat;
+        background-position: 0 0;
+        background-size: cover;
+    }
+
+    &__form {
+        padding: 32px;
+        border-radius: 16px;
+        margin: 0 auto;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%);
+        background-color: white !important;
+        width: 409px;
+
+        &-title {
+            color: #424242;
+            font-size: 26px;
+            line-height: 28, 13px;
+            font-weight: 900;
+            text-align: center;
+        }
+
+        &-inputs {
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        &-button {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 4px;
+            border: none;
+            width: 100%;
+            background:
+                linear-gradient(104.34deg,
+                    #41522E -15.34%,
+                    #BE8022 145.95%);
+            box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.15);
+            border-radius: 4px;
+            color: #fff;
+            cursor: pointer;
+
+            font-size: 16px;
+            font-weight: 500;
+            height: 50px;
+
+            &:hover {
+                opacity: 0.8;
+            }
+        }
+    }
+}
