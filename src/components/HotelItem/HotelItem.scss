@@ -1,0 +1,21 @@
+.hotel__item{
+display: flex;
+align-items: center;
+
+&-img{
+padding: 13px;
+background-color: rgba(65, 82, 46, 0.05);
+border-radius: 50%;
+    }
+
+    &-info{
+        h4{
+            line-height: 0;
+            padding: 0;
+        }
+    }
+
+    &-price{
+
+    }
+}

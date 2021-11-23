@@ -1,11 +1,12 @@
 import React from 'react'
+import FavoritesBlock from './FavoritesBlock'
 import SideForm from './SideForm'
 
 const Sidebar = () => {
     return (
-        <div>
-sdnkjlsd
+        <div className="sidebar">
             <SideForm/>
+            <FavoritesBlock/>
         </div>
     )
 }
