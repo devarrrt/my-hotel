@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { TextField } from '@material-ui/core'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
+import { useNavigate } from 'react-router';
+import { Context } from '../AppContext'
 
 const LoginPage = () => {
-    const schema = yup.object().shape({
+    const { user, setUser } = useContext(Context)
+     const schema = yup.object().shape({
         email: yup.string().email('Неверная почта').required('Введите почту'),
         password: yup.string().required().min(6, '​Минимальная длина пароля 6 символов'),
     })
@@ -14,10 +17,12 @@ const LoginPage = () => {
         mode: "onBlur",
         resolver: yupResolver(schema)
     })
+    const navigate = useNavigate()
 
     const onSubmit = (data) => {
         if (data.email && data.password) {
-            console.log(data)
+            setUser(data.email)
+            navigate('/')
         }
     }
     return (
@@ -49,7 +54,7 @@ const LoginPage = () => {
                     />
                     <button
                         type="submit"
-                        className="login__form-button">
+                        className="btn">
                         Войти
                     </button>
                 </form>

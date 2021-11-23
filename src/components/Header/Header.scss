@@ -1,0 +1,26 @@
+.header{
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+
+    &__logo{
+            font-size: 24px;
+            font-weight: 500;
+
+    }
+    &__logout{
+        display: flex;
+        align-items: center;
+        img{
+            cursor: pointer;
+        }
+
+        span{
+            color: #41522E;
+            font-size: 16px;
+            font-weight: 500;
+            margin-right: 20px;
+        }
+    }
+
+}

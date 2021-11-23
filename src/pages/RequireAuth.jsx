@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Navigate } from 'react-router'
+import { Context } from '../AppContext'
 
 const RequireAuth = ({ children }) => {
-const auth = true 
+    const { user } = useContext(Context) 
 
-    if ( !auth ) {
+    if (!user ) {
         return <Navigate to="/login" />
     }
     return children
