@@ -3,23 +3,31 @@ import { InputLabel, TextField } from '@material-ui/core'
 import { useForm } from 'react-hook-form'
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 
 import './Sidebar.scss'
 import { DatePicker } from '@mui/lab';
 import axios from 'axios';
 
+
+//получить кол-во дней 
 const SideForm = () => {
     const { register, handleSubmit, formState: { errors } } = useForm()
-    const [value, setValue] = useState(new Date(''));
+    const [city, setCity] = useState('')
+    const [valueDate, setValueDate] = useState(new Date(new Date('2021-11-24')));
+
+    const [hotels, setHotels] = useState()
+
+    console.log(hotels);
 
     const handleChange = (newValue) => {
-        setValue(newValue);
+        setValueDate(newValue);
     };
     const onSubmit = (data) => {
         console.log(data)
-        axios.post('http://engine.hotellook.com/api/v2/lookup.json?query=moscow&lang=ru&lookFor=both&limit=1')
-            .then(res => console.log(res.data.results) )
+        axios.post(`http://engine.hotellook.com/api/v2/cache.json?location=${city}&currency=rub&checkIn=${'2021-12-11'}&checkOut=${'2021-12-12'}&limit=15`)
+            .then(res => {
+                console.log(res.data)
+            })
     }
 
     return (
@@ -32,6 +40,8 @@ const SideForm = () => {
                     className="side-form__fields"
                     variant="outlined"
                     margin="normal"
+                    value={city}
+                    onChange={(e) => setCity(e.target.value)}
                 />
                 <InputLabel htmlFor="date">Дата заселения</InputLabel>
 
@@ -40,9 +50,12 @@ const SideForm = () => {
                     <DatePicker
                         mask="mm.dd.yy"
                         label="Begin date"
-                        value={value}
+                        value={valueDate}
                         onChange={handleChange}
                         renderInput={(params) => <TextField
+                            variant="outlined"
+                            margin="normal"
+                            className="side-form__fields"
                             {...params}
                         />}
                     />
