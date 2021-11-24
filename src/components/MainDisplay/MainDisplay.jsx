@@ -10,9 +10,9 @@ const MainDisplay = () => {
         <div className="main">
             <div className="main__header">
                 <div className="main__title">
-                    <h3> Отели  </h3>
-                    <img src={arrow} alt="arrowImg" />
-                    <h3> Москва  </h3>
+                    <h3> Отели &nbsp;  </h3>
+                    <img src={arrow} alt="arrowImg" /> &nbsp;
+                    &nbsp;  <h3> Москва  </h3>
                 </div>
                 <span className="main__date">
                     07 июля 2020
@@ -22,10 +22,11 @@ const MainDisplay = () => {
                 <img src={slider1} alt="sliderImg" />
                 <img src={slider1} alt="sliderImg" />
                 <img src={slider1} alt="sliderImg" />
-                <img src={slider1} alt="sliderImg" />
             </div>
             <span className="main__total"> Добавлено в Избранное: <b> 3 </b> отеля</span>
             <div className="hotel-list">
+                <HotelItem />
+                <HotelItem />
                 <HotelItem />
             </div>
         </div>
