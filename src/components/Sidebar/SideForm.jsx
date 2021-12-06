@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { InputLabel, TextField } from '@material-ui/core'
 import { useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
@@ -7,33 +7,22 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 
 import './Sidebar.scss'
 import { DatePicker } from '@mui/lab';
-import { getHotelsAction } from '../../redux/hotels/actionsHotels';
+import { getHotelsAction, fetchHotelsAction } from '../../redux/hotels/actionsHotels';
 
-
-//Date.prototype.addDays = function(days) {
-// var date = new Date(this.valueOf());
-// date.setDate(date.getDate() + days);
-// return date;
-// }
-
-// var date = new Date();
-// console.log(date.addDays(5)) - solution
-
-//посчитать кол-во дней/добавить второй календарь
 const SideForm = () => {
     const { register, handleSubmit, formState: { errors } } = useForm()
-    const [startDay, setStartDay] = useState(new Date('2021-11-24'));
-    const [days, setDays] = useState()
+    const [startDay, setStartDay] = useState(new Date())
+    const [endDay, setEndDay] = useState(new Date())
+
     const dispatch = useDispatch()
 
-    const endDay = Number(startDay.getDate()) + Number(days)
+    useEffect(() => {
+        dispatch(fetchHotelsAction())
+    }, [])
 
-
-    const handleChange = (newValue) => {
-        setStartDay(newValue);
-    };
     const onSubmit = (data) => {
-        dispatch(getHotelsAction(data.location, data.date, data.days))
+        dispatch(getHotelsAction(data))
+        console.log(data)
     }
 
     return (
@@ -57,30 +46,40 @@ const SideForm = () => {
                         mask="mm.dd.yy"
                         label="Begin date"
                         value={startDay}
-                        onChange={handleChange}
+                        onChange={(newValue) => setStartDay(newValue)}
                         renderInput={(params) => <TextField
                             variant="outlined"
                             margin="normal"
                             className="side-form__fields"
                             {...params}
                         />}
-                        {...register("date")}
-
+                        {...register("beginDate")}
                     />
                 </LocalizationProvider>
 
-                <InputLabel htmlFor="days">Количество дней</InputLabel>
-                <TextField
-                    id="days"
-                    className="side-form__fields"
-                    variant="outlined"
-                    margin="normal"
-                    {...register("days")}
-                />
+                <InputLabel htmlFor="date">Дата выселения</InputLabel>
+
+                <LocalizationProvider
+                    dateAdapter={AdapterDateFns} >
+                    <DatePicker
+                        name="date"
+                        mask="mm.dd.yy"
+                        label="End date"
+                        value={endDay}
+                        onChange={(newValue) => setEndDay(newValue)}
+                        renderInput={(params) => <TextField
+                            variant="outlined"
+                            margin="normal"
+                            className="side-form__fields"
+                            {...params}
+                        />}
+                        {...register("endDate")}
+                    />
+                </LocalizationProvider>
                 <button
                     type="submit"
                     className="btn">
-                    Войти
+                    Найти
                 </button>
             </form>
         </div>

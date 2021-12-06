@@ -1,7 +1,9 @@
 .sidebar{
     display: flex;
+    justify-content: space-between;
     flex-direction: column;
     margin-right: 24px;
+    height: 870px;
 }
 
 .side-form {
